@@ -1,0 +1,229 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "yum-rest",
+    "version": "0.0.1"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/Thing": {
+      "post": {
+        "operationId": "CreateThing",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateThingRes"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateThingReq"
+            }
+          }
+        ],
+        "tags": [
+          "RestService"
+        ]
+      },
+      "put": {
+        "operationId": "UpdateThing",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdateThingRes"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateThingReq"
+            }
+          }
+        ],
+        "tags": [
+          "RestService"
+        ]
+      }
+    },
+    "/v1/Thing/{thingID}": {
+      "get": {
+        "operationId": "GetThing",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetThingRes"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "thingID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "RestService"
+        ]
+      },
+      "delete": {
+        "operationId": "DeleteThing",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeleteThingRes"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "thingID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteThingReq"
+            }
+          }
+        ],
+        "tags": [
+          "RestService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CreateThingReq": {
+      "type": "object",
+      "properties": {
+        "thing": {
+          "$ref": "#/definitions/Thing"
+        }
+      }
+    },
+    "CreateThingRes": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "description": {
+          "type": "string"
+        },
+        "thingID": {
+          "type": "string"
+        }
+      }
+    },
+    "DeleteThingReq": {
+      "type": "object",
+      "properties": {
+        "thingID": {
+          "type": "string"
+        }
+      }
+    },
+    "DeleteThingRes": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "GetThingRes": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "description": {
+          "type": "string"
+        },
+        "thing": {
+          "$ref": "#/definitions/Thing"
+        }
+      }
+    },
+    "Object": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Thing": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "object": {
+          "$ref": "#/definitions/Object"
+        }
+      }
+    },
+    "UpdateThingReq": {
+      "type": "object",
+      "properties": {
+        "thing": {
+          "$ref": "#/definitions/Thing"
+        }
+      }
+    },
+    "UpdateThingRes": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
