@@ -21,29 +21,29 @@ func (rs *RestServiceServer) CreateThing(ctx context.Context, req *pb.CreateThin
 	cid := grpcmw.HandlerStart(ctx, "CreateThing")
 	phdlog.Info(logMessage, cid, zap.String("Request", req.String()))
 
-	if req.GetThing().GetThingID() == failID {
-		return nil, status.Errorf(codes.InvalidArgument, "Thing `%s` already exists", req.GetThing().GetThingID())
+	if req.GetThing().GetThingId() == failID {
+		return nil, status.Errorf(codes.InvalidArgument, "Thing `%s` already exists", req.GetThing().GetThingId())
 	}
 
 	if req.GetThing().GetName() == "Todd" {
 		return nil, status.Errorf(codes.InvalidArgument, "Cannot name Thing %s", req.GetThing().GetName())
 	}
 
-	if req.GetThing().GetThingID() == "uuid" {
+	if req.GetThing().GetThingId() == "uuid" {
 		return &pb.CreateThingRes{
 			Status:      http.StatusCreated,
 			Description: http.StatusText(http.StatusOK),
-			ThingID:     "09963975-06b8-4e59-aa61-3514b5dd22b3",
+			ThingId:     "09963975-06b8-4e59-aa61-3514b5dd22b3",
 		}, nil
 	}
 
-	header := metadata.Pairs("Location", "/Things/"+req.GetThing().GetThingID())
+	header := metadata.Pairs("Location", "/Things/"+req.GetThing().GetThingId())
 	_ = grpc.SetHeader(ctx, header)
 
 	// Return Thing
 	return &pb.CreateThingRes{
 		Status:      http.StatusCreated,
 		Description: http.StatusText(http.StatusOK),
-		ThingID:     req.GetThing().GetThingID(),
+		ThingId:     req.GetThing().GetThingId(),
 	}, nil
 }

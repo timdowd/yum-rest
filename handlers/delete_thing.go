@@ -19,13 +19,13 @@ func (rs *RestServiceServer) DeleteThing(ctx context.Context, req *pb.DeleteThin
 	cid := grpcmw.HandlerStart(ctx, "DeleteThing")
 	phdlog.Info(logMessage, cid, zap.String("Request", req.String()))
 
-	if req.GetThingID() == failID {
-		return nil, status.Errorf(codes.NotFound, "Thing `%s` does not exist", req.GetThingID())
+	if req.GetThingId() == failID {
+		return nil, status.Errorf(codes.NotFound, "Thing `%s` does not exist", req.GetThingId())
 	}
 
 	// Return Thing
 	return &pb.DeleteThingRes{
 		Status:      http.StatusOK,
-		Description: "Deleted thing " + req.GetThingID(),
+		Description: "Deleted thing " + req.GetThingId(),
 	}, nil
 }

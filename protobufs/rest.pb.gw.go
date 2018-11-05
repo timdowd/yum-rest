@@ -39,15 +39,15 @@ func request_RestService_GetThing_0(ctx context.Context, marshaler runtime.Marsh
 		_   = err
 	)
 
-	val, ok = pathParams["thingID"]
+	val, ok = pathParams["thingId"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "thingID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "thingId")
 	}
 
-	protoReq.ThingID, err = runtime.String(val)
+	protoReq.ThingId, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "thingID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "thingId", err)
 	}
 
 	msg, err := client.GetThing(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -87,15 +87,15 @@ func request_RestService_UpdateThing_0(ctx context.Context, marshaler runtime.Ma
 		_   = err
 	)
 
-	val, ok = pathParams["thing.thingID"]
+	val, ok = pathParams["thing.thingId"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "thing.thingID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "thing.thingId")
 	}
 
-	err = runtime.PopulateFieldFromPath(&protoReq, "thing.thingID", val)
+	err = runtime.PopulateFieldFromPath(&protoReq, "thing.thingId", val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "thing.thingID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "thing.thingId", err)
 	}
 
 	msg, err := client.UpdateThing(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -120,15 +120,15 @@ func request_RestService_DeleteThing_0(ctx context.Context, marshaler runtime.Ma
 		_   = err
 	)
 
-	val, ok = pathParams["thingID"]
+	val, ok = pathParams["thingId"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "thingID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "thingId")
 	}
 
-	protoReq.ThingID, err = runtime.String(val)
+	protoReq.ThingId, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "thingID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "thingId", err)
 	}
 
 	msg, err := client.DeleteThing(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -294,13 +294,13 @@ func RegisterRestServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 }
 
 var (
-	pattern_RestService_GetThing_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "Thing", "thingID"}, ""))
+	pattern_RestService_GetThing_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "thing", "thingId"}, ""))
 
-	pattern_RestService_CreateThing_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Thing"}, ""))
+	pattern_RestService_CreateThing_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "thing"}, ""))
 
-	pattern_RestService_UpdateThing_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "Thing", "thing.thingID"}, ""))
+	pattern_RestService_UpdateThing_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "thing", "thing.thingId"}, ""))
 
-	pattern_RestService_DeleteThing_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "Thing", "thingID"}, ""))
+	pattern_RestService_DeleteThing_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "thing", "thingId"}, ""))
 )
 
 var (

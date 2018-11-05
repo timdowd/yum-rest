@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/v1/Thing": {
+    "/v1/thing": {
       "post": {
         "operationId": "CreateThing",
         "responses": {
@@ -41,7 +41,7 @@
         ]
       }
     },
-    "/v1/Thing/{thing.thingID}": {
+    "/v1/thing/{thing.thingId}": {
       "put": {
         "operationId": "UpdateThing",
         "responses": {
@@ -54,7 +54,7 @@
         },
         "parameters": [
           {
-            "name": "thing.thingID",
+            "name": "thing.thingId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -73,7 +73,7 @@
         ]
       }
     },
-    "/v1/Thing/{thingID}": {
+    "/v1/thing/{thingId}": {
       "get": {
         "operationId": "GetThing",
         "responses": {
@@ -86,7 +86,7 @@
         },
         "parameters": [
           {
-            "name": "thingID",
+            "name": "thingId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -108,7 +108,7 @@
         },
         "parameters": [
           {
-            "name": "thingID",
+            "name": "thingId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -147,7 +147,7 @@
         "description": {
           "type": "string"
         },
-        "thingID": {
+        "thingId": {
           "type": "string"
         }
       }
@@ -155,7 +155,7 @@
     "DeleteThingReq": {
       "type": "object",
       "properties": {
-        "thingID": {
+        "thingId": {
           "type": "string"
         }
       }
@@ -202,7 +202,7 @@
     "Thing": {
       "type": "object",
       "properties": {
-        "thingID": {
+        "thingId": {
           "type": "string"
         },
         "name": {

@@ -29,11 +29,11 @@ func (rs *RestServiceServer) GetThing(ctx context.Context, req *pb.GetThingReq) 
 
 	gtSpan.End()
 
-	if req.GetThingID() == failID {
-		return nil, status.Errorf(codes.NotFound, "Thing `%s` was not found", req.GetThingID())
+	if req.GetThingId() == failID {
+		return nil, status.Errorf(codes.NotFound, "Thing `%s` was not found", req.GetThingId())
 	}
 
-	if req.GetThingID() == "dberror" {
+	if req.GetThingId() == "dberror" {
 		return nil, status.Errorf(codes.Internal, "Database Error: {{err}}")
 	}
 
@@ -42,7 +42,7 @@ func (rs *RestServiceServer) GetThing(ctx context.Context, req *pb.GetThingReq) 
 		Status:      http.StatusOK,
 		Description: http.StatusText(http.StatusOK),
 		Thing: &pb.Thing{
-			ThingID: req.GetThingID(),
+			ThingId: req.GetThingId(),
 			Name:    "Tom",
 			Object: &pb.Object{
 				Name:  "Mini Tom",

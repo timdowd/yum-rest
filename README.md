@@ -5,12 +5,13 @@ Examples of Yum RESTful interactions
 ### Topics:
 
 - ID, Id, or _id
-  - use {thing}ID in protobuf vs just id 
+  - use {thing}Id in protobuf vs just id 
+  - thingId
 
 - Key for update
   - in header or body
   - can it be changed (if not uuid)
-  - RFC 72314.3.4 PUT
+  - RFC 72314.3.4 PUT:
     - PUT should have same URI as GET
   
 - Quiet failure for delete?
