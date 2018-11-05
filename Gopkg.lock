@@ -6,7 +6,10 @@
   packages = [
     "compute/metadata",
     "internal/tracecontext",
-    "trace"
+    "internal/version",
+    "monitoring/apiv3",
+    "trace",
+    "trace/apiv2"
   ]
   revision = "dfffe386c33fb24c34ee501e5723df5b97b98514"
   version = "v0.30.0"
@@ -26,8 +29,10 @@
     "ptypes",
     "ptypes/any",
     "ptypes/duration",
+    "ptypes/empty",
     "ptypes/struct",
-    "ptypes/timestamp"
+    "ptypes/timestamp",
+    "ptypes/wrappers"
   ]
   revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
   version = "v1.2.0"
@@ -37,6 +42,12 @@
   packages = ["."]
   revision = "064e2069ce9c359c118179501254f67d7d37ba24"
   version = "0.2"
+
+[[projects]]
+  name = "github.com/googleapis/gax-go"
+  packages = ["."]
+  revision = "317e0006254c44a0ac427cc52a0e083ff0b9622f"
+  version = "v2.0.0"
 
 [[projects]]
   name = "github.com/grpc-ecosystem/go-grpc-middleware"
@@ -162,7 +173,7 @@
   name = "go.opencensus.io"
   packages = [
     ".",
-    "exemplar",
+    "exporter/stackdriver",
     "internal",
     "internal/tagencoding",
     "plugin/ocgrpc",
@@ -174,11 +185,10 @@
     "tag",
     "trace",
     "trace/internal",
-    "trace/propagation",
-    "trace/tracestate"
+    "trace/propagation"
   ]
-  revision = "b7bf3cdb64150a8c8c53b769fdeb2ba581bd4d4b"
-  version = "v0.18.0"
+  revision = "e262766cd0d230a1bb7c37281e345e465f19b41b"
+  version = "v0.14.0"
 
 [[projects]]
   name = "go.uber.org/atomic"
@@ -281,8 +291,11 @@
     "googleapi/internal/uritemplates",
     "googleapi/transport",
     "internal",
+    "iterator",
     "option",
     "support/bundler",
+    "transport",
+    "transport/grpc",
     "transport/http",
     "transport/http/internal/propagation"
   ]
@@ -299,7 +312,9 @@
     "internal/log",
     "internal/modules",
     "internal/remote_api",
+    "internal/socket",
     "internal/urlfetch",
+    "socket",
     "urlfetch"
   ]
   revision = "ae0ab99deb4dc413a2b4bd6c8bdd0eb67f1e4d06"
@@ -310,7 +325,14 @@
   name = "google.golang.org/genproto"
   packages = [
     "googleapis/api/annotations",
-    "googleapis/rpc/status"
+    "googleapis/api/distribution",
+    "googleapis/api/label",
+    "googleapis/api/metric",
+    "googleapis/api/monitoredres",
+    "googleapis/devtools/cloudtrace/v2",
+    "googleapis/monitoring/v3",
+    "googleapis/rpc/status",
+    "protobuf/field_mask"
   ]
   revision = "94acd270e44e65579b9ee3cdab25034d33fed608"
 
@@ -324,6 +346,7 @@
     "codes",
     "connectivity",
     "credentials",
+    "credentials/oauth",
     "encoding",
     "encoding/proto",
     "grpclog",
@@ -356,6 +379,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "61ce42e1f014cb543f5639c064192237719ff58c0bed221fecf8f94d0b51bf2b"
+  inputs-digest = "277def456f6dd2d542ff0efb072d7c5504eeb6511bf46d80df23c0ff0c28d28b"
   solver-name = "gps-cdcl"
   solver-version = 1

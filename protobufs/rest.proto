@@ -28,7 +28,7 @@ service RestService {
 
   rpc UpdateThing(UpdateThingReq) returns (UpdateThingRes) {
     option (google.api.http) = {
-      put: "/v1/Thing/{thing.id}"
+      put: "/v1/Thing/{thing.thingID}"
       body: "*"
     };
   }
@@ -42,7 +42,7 @@ service RestService {
 }
 
 message Thing {
-  string id = 1;
+  string thingID = 1;
   string name = 2;
   Object object = 4;
 }

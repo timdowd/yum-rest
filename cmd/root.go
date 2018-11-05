@@ -43,12 +43,16 @@ func init() {
 	RootCmd.PersistentFlags().StringP("rest-port", "R", "", "Port the rest server will listen on")
 	RootCmd.PersistentFlags().StringP("rpc-port", "r", "", "Port the rpc server will listen on")
 	RootCmd.PersistentFlags().StringP("rpc-address", "a", "", "Address the rpc server will listen on")
+	RootCmd.PersistentFlags().StringP("traceserviceaccountfile", "f", "", "Google Service Account file path")
+	RootCmd.PersistentFlags().StringP("projectid", "P", "", "Google cloud project id, e.g. -P phdigidev")
 
 	_ = viper.BindPFlag("server-ip", RootCmd.PersistentFlags().Lookup("server-ip"))
 	_ = viper.BindPFlag("servicename", RootCmd.PersistentFlags().Lookup("servicename"))
 	_ = viper.BindPFlag("rest-port", RootCmd.PersistentFlags().Lookup("rest-port"))
 	_ = viper.BindPFlag("rpc-port", RootCmd.PersistentFlags().Lookup("rpc-port"))
 	_ = viper.BindPFlag("rpc-address", RootCmd.PersistentFlags().Lookup("rpc-address"))
+	_ = viper.BindPFlag("traceserviceaccountfile", RootCmd.PersistentFlags().Lookup("traceserviceaccountfile"))
+	_ = viper.BindPFlag("projectid", RootCmd.PersistentFlags().Lookup("projectid"))
 
 }
 

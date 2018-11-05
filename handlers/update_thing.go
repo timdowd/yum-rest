@@ -19,20 +19,20 @@ func (rs *RestServiceServer) UpdateThing(ctx context.Context, req *pb.UpdateThin
 	cid := grpcmw.HandlerStart(ctx, "UpdateThing")
 	phdlog.Info(logMessage, cid, zap.String("Request", req.String()))
 
-	if req.GetThing().GetId() == failID {
-		return nil, status.Errorf(codes.NotFound, "Thing `%s` does not exist", req.GetThing().GetId())
+	if req.GetThing().GetThingID() == failID {
+		return nil, status.Errorf(codes.NotFound, "Thing `%s` does not exist", req.GetThing().GetThingID())
 	}
 
-	if req.GetThing().GetId() == "upsert" {
+	if req.GetThing().GetThingID() == "upsert" {
 		return &pb.UpdateThingRes{
 			Status:      http.StatusCreated,
-			Description: "Updated thing " + req.GetThing().GetId() + ", we would want a new field for new id?",
+			Description: "Updated thing " + req.GetThing().GetThingID() + ", we would want a new field for new id?",
 		}, nil
 	}
 
 	// Return Thing
 	return &pb.UpdateThingRes{
 		Status:      http.StatusOK,
-		Description: "Updated thing " + req.GetThing().GetId(),
+		Description: "Updated thing " + req.GetThing().GetThingID(),
 	}, nil
 }

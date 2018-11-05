@@ -9,7 +9,11 @@ import (
 // CORSMiddleware sets CORS headers manually in all of the responses.
 func CORSMiddleware(h http.Handler) http.Handler {
 	// List of allowed domains.
-	allowedOrigins := []string{"https://*.pizzahut.com/*"}
+	allowedOrigins := []string{
+		"https://rest-ui-dev01.digiapi.pizzahut.com",
+		"https://rest-ui-stg01.digiapi.pizzahut.com",
+		"https://rest-ui-prod.digiapi.pizzahut.com",
+	}
 
 	// If the env is set to dev allow localhost.
 	// if os.Getenv("ENV") == "dev" {

@@ -41,7 +41,7 @@
         ]
       }
     },
-    "/v1/Thing/{thing.id}": {
+    "/v1/Thing/{thing.thingID}": {
       "put": {
         "operationId": "UpdateThing",
         "responses": {
@@ -54,7 +54,7 @@
         },
         "parameters": [
           {
-            "name": "thing.id",
+            "name": "thing.thingID",
             "in": "path",
             "required": true,
             "type": "string"
@@ -202,7 +202,7 @@
     "Thing": {
       "type": "object",
       "properties": {
-        "id": {
+        "thingID": {
           "type": "string"
         },
         "name": {

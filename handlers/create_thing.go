@@ -8,7 +8,9 @@ import (
 	"github.com/pizzahutdigital/phdmw/phdlog"
 	pb "github.com/pizzahutdigital/yum-rest/protobufs"
 	"go.uber.org/zap"
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 )
 
@@ -19,15 +21,15 @@ func (rs *RestServiceServer) CreateThing(ctx context.Context, req *pb.CreateThin
 	cid := grpcmw.HandlerStart(ctx, "CreateThing")
 	phdlog.Info(logMessage, cid, zap.String("Request", req.String()))
 
-	if req.GetThing().GetId() == failID {
-		return nil, status.Errorf(codes.InvalidArgument, "Thing `%s` already exists", req.GetThing().GetId())
+	if req.GetThing().GetThingID() == failID {
+		return nil, status.Errorf(codes.InvalidArgument, "Thing `%s` already exists", req.GetThing().GetThingID())
 	}
 
 	if req.GetThing().GetName() == "Todd" {
 		return nil, status.Errorf(codes.InvalidArgument, "Cannot name Thing %s", req.GetThing().GetName())
 	}
 
-	if req.GetThing().GetId() == "uuid" {
+	if req.GetThing().GetThingID() == "uuid" {
 		return &pb.CreateThingRes{
 			Status:      http.StatusCreated,
 			Description: http.StatusText(http.StatusOK),
@@ -35,10 +37,13 @@ func (rs *RestServiceServer) CreateThing(ctx context.Context, req *pb.CreateThin
 		}, nil
 	}
 
+	header := metadata.Pairs("Location", "/Things/"+req.GetThing().GetThingID())
+	_ = grpc.SetHeader(ctx, header)
+
 	// Return Thing
 	return &pb.CreateThingRes{
 		Status:      http.StatusCreated,
 		Description: http.StatusText(http.StatusOK),
-		ThingID:     req.GetThing().GetId(),
+		ThingID:     req.GetThing().GetThingID(),
 	}, nil
 }

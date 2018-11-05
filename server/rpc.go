@@ -10,14 +10,45 @@ import (
 	pb "github.com/pizzahutdigital/yum-rest/protobufs"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
+	"go.opencensus.io/exporter/stackdriver"
 	"go.opencensus.io/plugin/ocgrpc"
 	"go.opencensus.io/trace"
 	"go.uber.org/zap"
+	"google.golang.org/api/option"
 	"google.golang.org/grpc"
 )
 
 // RunRPC starts rpc server for siskel
 func RunRPC() error {
+
+	// Get flags
+	traceserviceaccountfile := viper.GetString("traceserviceaccountfile")
+	if traceserviceaccountfile == "" {
+		return errors.New("You must supply a valid service account for tracing using the `traceserviceaccountfile` flag")
+	}
+
+	projectid := viper.GetString("projectid")
+	if projectid == "" {
+		return errors.New("You must provide a valid project id using the `projectid` argument")
+	}
+
+	// Create a stackdriver exporter for traces.
+	stackExporter, err := stackdriver.NewExporter(stackdriver.Options{
+		ProjectID: projectid,
+		TraceClientOptions: []option.ClientOption{
+			option.WithCredentialsFile(traceserviceaccountfile),
+		},
+	})
+	if err != nil {
+		werr := errors.Wrap(err, "stackdriver.NewExporter")
+		phdlog.Info(logMessage,
+			"",
+			zap.String("processStatus", "unable to create stackdriver exporter"),
+			zap.String("error", werr.Error()))
+		return werr
+	}
+	// Register the stackdriver exporter.
+	trace.RegisterExporter(stackExporter)
 
 	rpcPort := ":" + viper.GetString("rpc-port")
 	if rpcPort == ":" {
