@@ -39,7 +39,9 @@
         "tags": [
           "RestService"
         ]
-      },
+      }
+    },
+    "/v1/Thing/{thing.id}": {
       "put": {
         "operationId": "UpdateThing",
         "responses": {
@@ -51,6 +53,12 @@
           }
         },
         "parameters": [
+          {
+            "name": "thing.id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",

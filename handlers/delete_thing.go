@@ -8,6 +8,8 @@ import (
 	"github.com/pizzahutdigital/phdmw/phdlog"
 	pb "github.com/pizzahutdigital/yum-rest/protobufs"
 	"go.uber.org/zap"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // DeleteThing Deletes a Thing
@@ -17,10 +19,13 @@ func (rs *RestServiceServer) DeleteThing(ctx context.Context, req *pb.DeleteThin
 	cid := grpcmw.HandlerStart(ctx, "DeleteThing")
 	phdlog.Info(logMessage, cid, zap.String("Request", req.String()))
 
+	if req.GetThingID() == failID {
+		return nil, status.Errorf(codes.NotFound, "Thing `%s` does not exist", req.GetThingID())
+	}
+
 	// Return Thing
 	return &pb.DeleteThingRes{
-		Status: http.StatusOK,
-		// Big question: ID or id or Id ?
-		Description: "Updated thing " + req.GetThingID(),
+		Status:      http.StatusOK,
+		Description: "Deleted thing " + req.GetThingID(),
 	}, nil
 }

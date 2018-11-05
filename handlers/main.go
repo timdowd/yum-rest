@@ -1,5 +1,9 @@
 package handlers
 
+const (
+	failID = "xyz"
+)
+
 var logMessage = "yum-rest"
 
 // RestServiceServer proxy between rest and rpc
