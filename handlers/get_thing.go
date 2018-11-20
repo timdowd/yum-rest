@@ -21,12 +21,10 @@ func (rs *RestServiceServer) GetThing(ctx context.Context, req *pb.GetThingReq) 
 	cid := grpcmw.HandlerStart(ctx, "GetThing")
 	phdlog.Info(logMessage, cid, zap.String("Request", req.String()))
 
-	gtCtx, gtSpan := trace.StartSpan(ctx, "GetFakeThing")
-
+	gtCtx, gtSpan := trace.StartSpan(ctx, "GetFakeThing/"+cid)
 	// Fake some latency so trace feels important
 	time.Sleep(time.Millisecond * 500)
 	_ = gtCtx
-
 	gtSpan.End()
 
 	if req.GetThingId() == failID {
@@ -46,7 +44,7 @@ func (rs *RestServiceServer) GetThing(ctx context.Context, req *pb.GetThingReq) 
 			Name:    "Tom",
 			Object: &pb.Object{
 				Name:  "Mini Tom",
-				Value: 3,
+				Value: 0,
 			},
 		},
 	}, nil

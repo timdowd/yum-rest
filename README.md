@@ -7,6 +7,12 @@ Examples of Yum RESTful interactions
 - ID, Id, or _id
   - use {thing}Id in protobuf vs just id 
   - thingId
+  - capital ID
+
+- Requests from frontend:
+  - return whole object on POST and PUT
+  - consistent error response (protobuf)
+  - location header
 
 - Key for update
   - in header or body
@@ -18,6 +24,7 @@ Examples of Yum RESTful interactions
   - 200 with statusCode and status
   - 204 with no body
   - 404 for failure
+  - 200 is better
 
 - Scrub _id from PUT swagger entry?
 

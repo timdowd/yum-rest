@@ -16,6 +16,7 @@ func ConversationIDMiddleware(h http.Handler) http.Handler {
 			convID = phdcid.CreateCID()
 			r.Header["Grpc-Metadata-"+phdcid.GetCIDKeyName()] = []string{convID}
 		}
+
 		// set conversation ID in current context
 		ctx := phdcid.SetCIDInContext(r.Context(), convID)
 		// associated context with response

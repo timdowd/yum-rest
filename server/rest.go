@@ -75,7 +75,15 @@ func RunREST() error {
 	}
 
 	opts := []grpc.DialOption{grpc.WithInsecure()}
-	mux := runtime.NewServeMux()
+
+	headerToMatch := map[string]bool{
+		"location": true,
+	}
+
+	mux := runtime.NewServeMux(runtime.WithOutgoingHeaderMatcher(func(header string) (string, bool) {
+		return header, headerToMatch[header]
+	}))
+
 	err := pb.RegisterRestServiceHandlerFromEndpoint(context.Background(), mux, fmt.Sprintf("%s:%s", rpcIP, rpcPort), opts)
 	if err != nil {
 		return errors.Wrap(err, "failed to start HTTP server: %v")
