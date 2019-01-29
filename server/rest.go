@@ -23,7 +23,8 @@ const (
 )
 
 type errorBody struct {
-	Err string `json:"error,omitempty"`
+	Status      int    `json:"status,omitempty"`
+	Description string `json:"description,omitempty"`
 }
 
 // CustomHTTPError custom error
@@ -33,7 +34,8 @@ func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime
 	w.Header().Set("Content-type", marshaler.ContentType())
 	w.WriteHeader(runtime.HTTPStatusFromCode(grpc.Code(err)))
 	jErr := json.NewEncoder(w).Encode(errorBody{
-		Err: grpc.ErrorDesc(err),
+		Status:      runtime.HTTPStatusFromCode(grpc.Code(err)),
+		Description: grpc.ErrorDesc(err),
 	})
 
 	if jErr != nil {
